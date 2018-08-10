@@ -70,6 +70,11 @@ const adicionarCategoria = categorias => tipoInput =>
 		} else 
 			return adicionarCategoria(objetoParaArray(categoria))(tipoInput)
 	})
+//RENDERIZAR
+//como construir essa parte?
+//[ [], [], [] ]
+//
+
 
 //CORPO DO PROGRAMA
 
@@ -111,9 +116,7 @@ guardarQuantidade.addEventListener('click', () => {
 	}
 
 	atualizandoTela(0, parseInt(quantidade.tamanho))
-	console.log(campos)
-
-	campos.forEach(item => adicionarFilho(document.body)(item))
+	renderizar(campos)
 })
 /*
 [[1],[2],[[3,4]], [[5,6]]]
