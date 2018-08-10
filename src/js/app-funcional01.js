@@ -56,22 +56,19 @@ const objetoParaArray = objeto => {
 	for (let event in objeto) {
 		array.push(objeto[event])
 	}
+	console.log(array)
 	return array
 }
 
 //adicionarCategoria:: Array => String => Array
 const adicionarCategoria = categorias => tipoInput =>
 	categorias.map(categoria => {
-		console.log(categorias, 'depois do loop')
 		if (typeof categoria === 'string') {
 			const label = elementoComTexto('label')(categoria)
 			const input = criarInput(tipoInput)
 			return [label, input]
 		} else 
-			return adicionarCategoria(objetoParaArray(categoria)
-					.reduce((anterior, posterior) => 
-						anterior.concat(posterior))
-					)('radio')
+			return adicionarCategoria(objetoParaArray(categoria))(tipoInput)
 	})
 
 //CORPO DO PROGRAMA
@@ -89,25 +86,40 @@ guardarQuantidade.addEventListener('click', () => {
 
 	//criarLista:: (Number, Number) -> Array
 	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
-		if (tamanhoAtual > tamanhoIdeal) return null
+		if (tamanhoAtual === tamanhoIdeal) return null
 		//criando elementos DOM
 		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
 		const div = criarElemento('div')
 		const filhosForm = adicionarCategoria(categorias)('radio')
-		.reduce((anterior, posterior) => {
-			if (typeof posterior === [])
-				return post.reduce((ant, post) => ant.concat(post))
-			return anterior.concat(posterior) 
-		})
-		console.log('feito:', filhosForm)
-
-		filhosForm.forEach(filho => adicionarFilho(formulario)(filho))
 		
-		ampos.push(formulario)
-		atualizandoTela(tamanhoAtual++, tamanhoIdeal)
+
+		const todosFilhos = filhosForm.reduce((anterior, posterior) => {
+			let atual = posterior
+			if (Array.isArray(posterior[0])) {
+				atual = []
+				posterior.map(item => item.reduce((ant, post) => 
+					ant.concat(post)
+				)).forEach( arrayAtual => 
+					arrayAtual.forEach( x => atual.push(x) )
+				)
+			}
+			return anterior.concat(atual)
+		})
+
+		campos.push(todosFilhos)
+		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
 
 	atualizandoTela(0, parseInt(quantidade.tamanho))
+	console.log(campos)
 
 	campos.forEach(item => adicionarFilho(document.body)(item))
 })
+/*
+[[1],[2],[[3,4]], [[5,6]]]
+reduce.(item => [1, 2] 
+	se for array de array [[1],[2]]
+	.reduce( returnar [1,2].reduce.
+		(item => arrayPrimeiro.concat(item))))
+
+*/
