@@ -56,7 +56,6 @@ const objetoParaArray = objeto => {
 	for (let event in objeto) {
 		array.push(objeto[event])
 	}
-	console.log(array)
 	return array
 }
 
@@ -71,10 +70,15 @@ const adicionarCategoria = categorias => tipoInput =>
 			return adicionarCategoria(objetoParaArray(categoria))(tipoInput)
 	})
 //RENDERIZAR
-//como construir essa parte?
-//[ [], [], [] ]
-//
 
+//renderizar:: array -> object -> undefined
+const renderizar = arrayDeFilhos => elementoPai => {
+	arrayDeFilhos.forEach( arrayFilho =>
+		arrayFilho.forEach(filho =>
+			adicionarFilho(elementoPai)(filho)
+		)
+	)
+}
 
 //CORPO DO PROGRAMA
 
@@ -96,7 +100,6 @@ guardarQuantidade.addEventListener('click', () => {
 		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
 		const div = criarElemento('div')
 		const filhosForm = adicionarCategoria(categorias)('radio')
-		
 
 		const todosFilhos = filhosForm.reduce((anterior, posterior) => {
 			let atual = posterior
@@ -116,13 +119,7 @@ guardarQuantidade.addEventListener('click', () => {
 	}
 
 	atualizandoTela(0, parseInt(quantidade.tamanho))
-	renderizar(campos)
-})
-/*
-[[1],[2],[[3,4]], [[5,6]]]
-reduce.(item => [1, 2] 
-	se for array de array [[1],[2]]
-	.reduce( returnar [1,2].reduce.
-		(item => arrayPrimeiro.concat(item))))
 
-*/
+	const areaNomes = document.getElementById('areaNomes')
+	renderizar(campos)(areaNomes)
+})
