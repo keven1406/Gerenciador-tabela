@@ -4,6 +4,9 @@
 		<title>Gerenciando</title>
 		<meta charset = 'UTF-8'/>
 		<style>
+			body {
+				font-family: "Arial", sans-serif;
+			}
 			#areaNomes {
 				background-color: #a795b9;
 				padding: 10px;
@@ -19,6 +22,11 @@
 			}
 			#telaTabela {
 				display: none;
+			}
+			form {
+				border: 2px solid white;
+				margin: 5px;
+				padding: 10px;
 			}
 			
 		</style>
@@ -44,13 +52,12 @@
 		<!-- Tela de cadastro -->
 		<section id = "telaCadastro">
 			<header>
-				<h1>Guardar Nomes</h1>
+				<h1>Inserir nomes</h1>
 			</header>
-			<h1>digite o nome de todas as pessoas que pertencerão a lista: </h1>
 			<div>
-				<h1>Digite a quantidade de pessoas</h1>
+				<p>Digite a quantidade de pessoas e após isso, seus nomes e respectivos cargos.</p>
 				<section>
-					<input type = 'number' id = 'quantidadePessoas' min = '1'/>
+					<input type = 'number' id = 'quantidadePessoas' min = '2'/>
 					<button id = 'guardarQuantidade'>Salvar</button>
 				</section>
 				<div id = 'areaNomes'></div>

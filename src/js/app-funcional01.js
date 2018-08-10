@@ -29,7 +29,8 @@ const categorias = [
 	'microfones',
 	'palco',
 	'balcao de publicações',
-	{ sistemaSonoro: ['titular', 'auxiliar'] }
+	'Sistema sonoro'
+	//{ sistemaSonoro: ['titular', 'auxiliar'] }
 ]
 
 //elementoComTexto:: string -> string -> object
@@ -79,8 +80,6 @@ const concatenarCategorias = listaCategoria =>
 			return anterior.concat(atual)
 	})
 
-//RENDERIZAR
-
 //renderizar:: array -> object -> undefined
 const renderizar = arrayDeFilhos => elementoPai => {
 	arrayDeFilhos.forEach( arrayFilho =>
@@ -97,16 +96,26 @@ const quantidadePessoas = document.getElementById('quantidadePessoas')
 const guardarQuantidade = document.getElementById('guardarQuantidade')
 const quantidade = {};
 
+const apagarFilhos = pai => {
+	for (let evento = pai.childNodes.length - 1; evento >= 0; evento--) {
+		pai.removeChild(pai.childNodes[evento])
+	}
+}
 //Acionando Evento
 guardarQuantidade.addEventListener('click', () => {
+	const areaNomes = document.getElementById('areaNomes')
+	if (areaNomes.childNodes[1] != undefined) {
+		apagarFilhos(areaNomes)
+	}
 	quantidade.tamanho = quantidadePessoas.value
+
+	//RENDERIZAR
 
 	//criarLista:: (Number, Number) -> Array
 	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
 		if (tamanhoAtual === tamanhoIdeal) return null
 		//criando elementos DOM
 
-		const areaNomes = document.getElementById('areaNomes')
 		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
 		const div = criarElemento('div')
 
@@ -117,12 +126,14 @@ guardarQuantidade.addEventListener('click', () => {
 		const filhosForm = adicionarCategoria(categorias)('checkbox')
 		const todosFilhos = concatenarCategorias(filhosForm)
 		const campos = []
-		
+
 		campos.push(todosFilhos)
 		renderizar(campos)(formulario)
 		areaNomes.appendChild(formulario)
+
 		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
-
 	atualizandoTela(0, parseInt(quantidade.tamanho))
 })
+
+//primeiro evento acabado
