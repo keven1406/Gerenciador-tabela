@@ -64,6 +64,21 @@ const adicionarCategoria = categorias => tipoInput =>
 		} else 
 			return adicionarCategoria(objetoParaArray(categoria))(tipoInput)
 	})
+
+const concatenarCategorias = listaCategoria => 
+	listaCategoria.reduce((anterior, posterior) => {
+			let atual = posterior
+			if (Array.isArray(posterior[0])) {
+				atual = []
+				posterior.map(item => item.reduce((ant, post) => 
+					ant.concat(post)
+				)).forEach( arrayAtual => 
+					arrayAtual.forEach( x => atual.push(x) )
+				)
+			}
+			return anterior.concat(atual)
+	})
+
 //RENDERIZAR
 
 //renderizar:: array -> object -> undefined
@@ -86,35 +101,28 @@ const quantidade = {};
 guardarQuantidade.addEventListener('click', () => {
 	quantidade.tamanho = quantidadePessoas.value
 
-	const campos = []
-
 	//criarLista:: (Number, Number) -> Array
 	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
 		if (tamanhoAtual === tamanhoIdeal) return null
 		//criando elementos DOM
+
+		const areaNomes = document.getElementById('areaNomes')
 		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
 		const div = criarElemento('div')
-		const filhosForm = adicionarCategoria(categorias)('radio')
 
-		const todosFilhos = filhosForm.reduce((anterior, posterior) => {
-			let atual = posterior
-			if (Array.isArray(posterior[0])) {
-				atual = []
-				posterior.map(item => item.reduce((ant, post) => 
-					ant.concat(post)
-				)).forEach( arrayAtual => 
-					arrayAtual.forEach( x => atual.push(x) )
-				)
-			}
-			return anterior.concat(atual)
-		})
+		adicionarFilho(formulario)(elementoComTexto('label')('Nome: '))
+		adicionarFilho(formulario)(criarInput('text'))
 
+
+		const filhosForm = adicionarCategoria(categorias)('checkbox')
+		const todosFilhos = concatenarCategorias(filhosForm)
+		const campos = []
+		
 		campos.push(todosFilhos)
+		renderizar(campos)(formulario)
+		areaNomes.appendChild(formulario)
 		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
 
 	atualizandoTela(0, parseInt(quantidade.tamanho))
-
-	const areaNomes = document.getElementById('areaNomes')
-	renderizar(campos)(areaNomes)
 })
