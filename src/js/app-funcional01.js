@@ -1,13 +1,13 @@
 //input:: String -> object
 const criarElemento = tipo => document.createElement(tipo)
 
-//inputTexto:: object => object
+//inputTexto:: object -> object
 const inputTexto = input => {
 	input.type = 'text'
 	return input
 }
 
-//adicionarTexto = string => object
+//adicionarTexto:: string -> object
 const adicionarTexto = texto => document.createTextNode(texto)
 
 //idicionarId:: Number -> object -> object
@@ -19,15 +19,10 @@ const adicionarId = numero => elemento => {
 	else return elemento
 }
 
-//adicionarFilho:: object => object
+//adicionarFilho:: object -> object
 const adicionarFilho = elementoPai => elementoFilho => {
 	elementoPai.appendChild(elementoFilho)
 }
-
-//Não será utilizada, ou seja, irei deletar.
-//addVariosFilhos:: array => array
-const addVariosFilhos = pai => filhos => 
-	filhos.forEach(filho => adicionarFilho(pai)(filho))
 
 const categorias = [
 	'indicadores',
@@ -43,14 +38,14 @@ const elementoComTexto = tipo => texto => {
 	adicionarFilho(container)(adicionarTexto(texto))
 	return container
 }
-//criarInput:: string => object
+//criarInput:: string -> object
 const criarInput = tipo => {
 	const elementoInput = criarElemento('input')
 	elementoInput.type = tipo
 	return elementoInput
 }
 
-//objetoParaArray -> Object -> Array
+//objetoParaArray:: Object -> Array
 const objetoParaArray = objeto => {
 	const array = []
 	for (let event in objeto) {
@@ -59,7 +54,7 @@ const objetoParaArray = objeto => {
 	return array
 }
 
-//adicionarCategoria:: Array => String => Array
+//adicionarCategoria:: Array -> String -> Array
 const adicionarCategoria = categorias => tipoInput =>
 	categorias.map(categoria => {
 		if (typeof categoria === 'string') {
