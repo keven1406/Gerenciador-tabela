@@ -1,13 +1,13 @@
 //input:: String -> object
 const criarElemento = tipo => document.createElement(tipo)
 
-//inputTexto:: object => object
+//inputTexto:: object -> object
 const inputTexto = input => {
 	input.type = 'text'
 	return input
 }
 
-//adicionarTexto = string => object
+//adicionarTexto:: string -> object
 const adicionarTexto = texto => document.createTextNode(texto)
 
 //idicionarId:: Number -> object -> object
@@ -19,21 +19,17 @@ const adicionarId = numero => elemento => {
 	else return elemento
 }
 
-//adicionarFilho:: object => object
+//adicionarFilho:: object -> object
 const adicionarFilho = elementoPai => elementoFilho => {
 	elementoPai.appendChild(elementoFilho)
 }
-
-//Não será utilizada, ou seja, irei deletar.
-//addVariosFilhos:: array => array
-const addVariosFilhos = pai => filhos => 
-	filhos.forEach(filho => adicionarFilho(pai)(filho))
 
 const categorias = [
 	'indicadores',
 	'microfones',
 	'palco',
 	'balcao de publicações',
+	//'Sistema sonoro'
 	{ sistemaSonoro: ['titular', 'auxiliar'] }
 ]
 
@@ -43,24 +39,23 @@ const elementoComTexto = tipo => texto => {
 	adicionarFilho(container)(adicionarTexto(texto))
 	return container
 }
-//criarInput:: string => object
+//criarInput:: string -> object
 const criarInput = tipo => {
 	const elementoInput = criarElemento('input')
 	elementoInput.type = tipo
 	return elementoInput
 }
 
-//objetoParaArray -> Object -> Array
+//objetoParaArray:: Object -> Array
 const objetoParaArray = objeto => {
 	const array = []
 	for (let event in objeto) {
 		array.push(objeto[event])
 	}
-	console.log(array)
 	return array
 }
 
-//adicionarCategoria:: Array => String => Array
+//adicionarCategoria:: Array -> String -> Array
 const adicionarCategoria = categorias => tipoInput =>
 	categorias.map(categoria => {
 		if (typeof categoria === 'string') {
@@ -71,29 +66,8 @@ const adicionarCategoria = categorias => tipoInput =>
 			return adicionarCategoria(objetoParaArray(categoria))(tipoInput)
 	})
 
-//CORPO DO PROGRAMA
-
-//Quantidade de pessoas na lista
-const quantidadePessoas = document.getElementById('quantidadePessoas')
-const guardarQuantidade = document.getElementById('guardarQuantidade')
-const quantidade = {};
-
-//Acionando Evento
-guardarQuantidade.addEventListener('click', () => {
-	quantidade.tamanho = quantidadePessoas.value
-
-	const campos = []
-
-	//criarLista:: (Number, Number) -> Array
-	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
-		if (tamanhoAtual === tamanhoIdeal) return null
-		//criando elementos DOM
-		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
-		const div = criarElemento('div')
-		const filhosForm = adicionarCategoria(categorias)('radio')
-		
-
-		const todosFilhos = filhosForm.reduce((anterior, posterior) => {
+const concatenarCategorias = listaCategoria => 
+	listaCategoria.reduce((anterior, posterior) => {
 			let atual = posterior
 			if (Array.isArray(posterior[0])) {
 				atual = []
@@ -104,22 +78,73 @@ guardarQuantidade.addEventListener('click', () => {
 				)
 			}
 			return anterior.concat(atual)
-		})
+	})
 
+//renderizar:: array -> object -> undefined
+const renderizar = arrayDeFilhos => elementoPai => {
+	arrayDeFilhos.forEach( arrayFilho =>
+		arrayFilho.forEach(filho =>
+			adicionarFilho(elementoPai)(filho)
+		)
+	)
+}
+
+//CORPO DO PROGRAMA
+
+//Quantidade de pessoas na lista
+const quantidadePessoas = document.getElementById('quantidadePessoas')
+const guardarQuantidade = document.getElementById('guardarQuantidade')
+const quantidade = {};
+
+const apagarFilhos = pai => {
+	for (let evento = pai.childNodes.length - 1; evento >= 0; evento--) {
+		pai.removeChild(pai.childNodes[evento])
+	}
+}
+//Acionando Evento
+const listaPessoas = []
+guardarQuantidade.addEventListener('click', () => {
+	const areaNomes = document.getElementById('areaNomes')
+	if (areaNomes.childNodes[1] != undefined) {
+		apagarFilhos(areaNomes)
+	}
+	quantidade.tamanho = quantidadePessoas.value
+
+	//RENDERIZAR
+
+	//criarLista:: (Number, Number) -> Array
+	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
+		if (tamanhoAtual === tamanhoIdeal) return null
+		//criando elementos DOM
+
+		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
+		const div = criarElemento('div')
+		const nome = elementoComTexto('label')('Nome: ')
+		const nomeInput = criarInput('text')
+
+
+		adicionarFilho(formulario)(nome)
+		adicionarFilho(formulario)(nomeInput)
+
+
+		const filhosForm = adicionarCategoria(categorias)('checkbox')
+		const todosFilhos = concatenarCategorias(filhosForm)
+		const campos = []
+		campos.push(nome)
+		campos.push(nomeInput)
+		const formCompleto = campos.concat(todosFilhos)
 		campos.push(todosFilhos)
+		listaPessoas.push(formCompleto)
+		console.log(formCompleto)
+		//renderizar(campos)(formulario)
+		//areaNomes.appendChild(formulario)
+
+		//[   ]
+
 		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
-
 	atualizandoTela(0, parseInt(quantidade.tamanho))
-	console.log(campos)
-
-	campos.forEach(item => adicionarFilho(document.body)(item))
+	console.log(listaPessoas)
 })
-/*
-[[1],[2],[[3,4]], [[5,6]]]
-reduce.(item => [1, 2] 
-	se for array de array [[1],[2]]
-	.reduce( returnar [1,2].reduce.
-		(item => arrayPrimeiro.concat(item))))
 
-*/
+//primeiro evento acabado

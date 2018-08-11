@@ -1,2 +1,2 @@
 # Gerenciador-tabela
-Um gerenciador de tabelas e listas
+Um gerenciador de tabelas e listas.
