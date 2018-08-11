@@ -91,7 +91,7 @@ const renderizar = arrayDeFilhos => elementoPai => {
 	})
 }
 
-const listaPessoas = []
+let listaPessoas = []
 
 //criarLista:: (Number, Number) -> undefined --- impura
 function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
@@ -107,7 +107,7 @@ function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
 		const formCompleto = campos.concat(todosFilhos)
 		campos.push(todosFilhos)
 		listaPessoas.push(formCompleto)
-		
+
 		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
 
@@ -126,6 +126,7 @@ const apagarFilhos = pai => {
 //Acionando Evento
 
 guardarQuantidade.addEventListener('click', () => {
+	listaPessoas = []
 	const areaNomes = document.getElementById('areaNomes')
 	if (areaNomes.childNodes[1] != undefined) {
 		apagarFilhos(areaNomes)
