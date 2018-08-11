@@ -25,13 +25,11 @@ const adicionarFilho = elementoPai => elementoFilho => {
 }
 
 const categorias = [
-	'estudo de livro',
-	'A sentinela',
-//	'palco',
-//	'balcao de publicações',
-//	'Sistema sonoro',
-//	'estacionamento'
-	//{ sistemaSonoro: ['titular', 'auxiliar'] }
+	'palco',
+	'balcao de publicações',
+	'Sistema sonoro',
+	'estacionamento',
+	{ sistemaSonoro: ['titular', 'auxiliar'] }
 ]
 
 //elementoComTexto:: string -> string -> object
@@ -99,7 +97,6 @@ const listaPessoas = []
 function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
 		if (tamanhoAtual === tamanhoIdeal) return null
 		//criando elementos DOM
-		//const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
 		const nome = elementoComTexto('label')('Nome: ')
 		const nomeInput = criarInput('text')
 		const filhosForm = adicionarCategoria(categorias)('checkbox')
@@ -110,9 +107,7 @@ function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
 		const formCompleto = campos.concat(todosFilhos)
 		campos.push(todosFilhos)
 		listaPessoas.push(formCompleto)
-
-		console.log(formCompleto)
-		//renderizar(campos)(formulario)
+		
 		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
 	}
 
