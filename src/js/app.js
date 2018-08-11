@@ -1,0 +1,1 @@
+adicionarFilho(document.body)(criarElemento('input'))

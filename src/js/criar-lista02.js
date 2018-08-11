@@ -25,11 +25,12 @@ const adicionarFilho = elementoPai => elementoFilho => {
 }
 
 const categorias = [
-	'indicadores',
-	'microfones',
-	'palco',
-	'balcao de publicações',
-	'Sistema sonoro'
+	'estudo de livro',
+	'A sentinela',
+//	'palco',
+//	'balcao de publicações',
+//	'Sistema sonoro',
+//	'estacionamento'
 	//{ sistemaSonoro: ['titular', 'auxiliar'] }
 ]
 
@@ -82,12 +83,38 @@ const concatenarCategorias = listaCategoria =>
 
 //renderizar:: array -> object -> undefined
 const renderizar = arrayDeFilhos => elementoPai => {
-	arrayDeFilhos.forEach( arrayFilho =>
-		arrayFilho.forEach(filho =>
-			adicionarFilho(elementoPai)(filho)
-		)
-	)
+	arrayDeFilhos.forEach((arrayFilho, indice ) => {
+		const pai = adicionarId(indice)(criarElemento(elementoPai))
+		arrayFilho.forEach(filho => {
+			const mostrarNomes = document.getElementById('areaNomes')
+			adicionarFilho(pai)(filho)
+			adicionarFilho(mostrarNomes)(pai)	
+		})
+	})
 }
+
+const listaPessoas = []
+
+//criarLista:: (Number, Number) -> undefined --- impura
+function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
+		if (tamanhoAtual === tamanhoIdeal) return null
+		//criando elementos DOM
+		//const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
+		const nome = elementoComTexto('label')('Nome: ')
+		const nomeInput = criarInput('text')
+		const filhosForm = adicionarCategoria(categorias)('checkbox')
+		const todosFilhos = concatenarCategorias(filhosForm)
+		const campos = []
+		campos.push(nome)
+		campos.push(nomeInput)
+		const formCompleto = campos.concat(todosFilhos)
+		campos.push(todosFilhos)
+		listaPessoas.push(formCompleto)
+
+		console.log(formCompleto)
+		//renderizar(campos)(formulario)
+		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
+	}
 
 //CORPO DO PROGRAMA
 
@@ -102,38 +129,20 @@ const apagarFilhos = pai => {
 	}
 }
 //Acionando Evento
+
 guardarQuantidade.addEventListener('click', () => {
 	const areaNomes = document.getElementById('areaNomes')
 	if (areaNomes.childNodes[1] != undefined) {
 		apagarFilhos(areaNomes)
 	}
+
 	quantidade.tamanho = quantidadePessoas.value
+	atualizandoTela(0, parseInt(quantidade.tamanho))
 
 	//RENDERIZAR
-
-	//criarLista:: (Number, Number) -> Array
-	function atualizandoTela (tamanhoAtual, tamanhoIdeal) {
-		if (tamanhoAtual === tamanhoIdeal) return null
-		//criando elementos DOM
-
-		const formulario = adicionarId(tamanhoAtual)(criarElemento('form'))
-		const div = criarElemento('div')
-
-		adicionarFilho(formulario)(elementoComTexto('label')('Nome: '))
-		adicionarFilho(formulario)(criarInput('text'))
+	renderizar(listaPessoas)('form')
 
 
-		const filhosForm = adicionarCategoria(categorias)('checkbox')
-		const todosFilhos = concatenarCategorias(filhosForm)
-		const campos = []
-
-		campos.push(todosFilhos)
-		renderizar(campos)(formulario)
-		areaNomes.appendChild(formulario)
-
-		atualizandoTela(tamanhoAtual + 1, tamanhoIdeal)
-	}
-	atualizandoTela(0, parseInt(quantidade.tamanho))
 })
 
 //primeiro evento acabado
