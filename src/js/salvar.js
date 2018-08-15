@@ -13,7 +13,6 @@
 const pegarOcupacao = array => {
 	const objeto = {}
 	array.forEach(item => {
-		//endireitar na entrada de input, ou seja, criar uma coisa com nome unico kk
 		if ((item.nodeName === "INPUT") && (item.checked === true))
 			objeto[item.name] = 0
 	})
@@ -23,7 +22,7 @@ const pegarOcupacao = array => {
 //Pessoa:: Array -> Object
 function PessoaSchema(elemento) {
 	this.nome = elemento[1].value
-	//devo criar ID aqui,ta? Burrrooo! 
+	//devo criar um sistema de ID aqui.
 	this.ID = elemento.id
 	this.ocupacao = pegarOcupacao(elemento.slice(2, elemento.length))
 }
