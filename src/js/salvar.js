@@ -6,8 +6,8 @@
 
 //OBSERVAÇÕES IMPORTANTES: ANTES DE SALVAR NO BANCO, PRECISA HAVER VALIDAÇÃO!
 
-//como pegar a ocupação???
-// FORM[LABEL + INPUTEXT,  ]
+//criarId:: Number -> object -> String
+const criarId = indice => "pessoa" + indice
 
 //arrayEmObjecto:: Array -> Object
 const pegarOcupacao = array => {
@@ -20,16 +20,23 @@ const pegarOcupacao = array => {
 }
 
 //Pessoa:: Array -> Object
-function PessoaSchema(elemento) {
-	this.nome = elemento[1].value
-	//devo criar um sistema de ID aqui.
-	this.ID = elemento.id
-	this.ocupacao = pegarOcupacao(elemento.slice(2, elemento.length))
+class PessoaSchema {
+	constructor (elemento, indice) {
+		this.nome = elemento[1].value
+		this.ID = criarId(indice)
+		this.ocupacao = pegarOcupacao(elemento.slice(2, elemento.length))
+	}
 }
 
 const salvarNomes = document.getElementById('salvarNomes')
 
 salvarNomes.addEventListener('click', () => {
-	const listaCriada = listaPessoas.map(arrayElementos => new PessoaSchema(arrayElementos))
+	const listaCriada = listaPessoas
+	.map((arrayElementos, indice) => 
+		new PessoaSchema(arrayElementos, indice)
+	)
+
 	console.log(JSON.stringify(listaCriada))
+
+	//adicionar aqui a função para salvar
 })
