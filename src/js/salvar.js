@@ -1,3 +1,5 @@
+'use strict'
+
 //salvar no localStorage
 
 //experiencia envolvida: Antes de fazer qualquer projeto, veja como vai ser as saidas de dados.
@@ -6,7 +8,6 @@
 
 //como pegar a ocupação???
 // FORM[LABEL + INPUTEXT,  ]
-//
 
 //arrayEmObjecto:: Array -> Object
 const pegarOcupacao = array => {
@@ -30,8 +31,6 @@ function PessoaSchema(elemento) {
 const salvarNomes = document.getElementById('salvarNomes')
 
 salvarNomes.addEventListener('click', () => {
-
-	//array [[1,2,3],[1,2,3],[1,2,3]] 
 	const listaCriada = listaPessoas.map(arrayElementos => new PessoaSchema(arrayElementos))
 	console.log(JSON.stringify(listaCriada))
 })

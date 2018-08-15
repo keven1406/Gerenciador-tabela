@@ -1,3 +1,5 @@
+'use strict'
+
 //input:: String -> object
 const criarElemento = tipo => document.createElement(tipo)
 
@@ -25,11 +27,11 @@ const adicionarFilho = elementoPai => elementoFilho => {
 }
 
 const categorias = [
-	'palco',
-	'balcao de publicações',
+	'Palco',
+	'Balcao de publicações',
 	'Sistema sonoro',
-	'estacionamento',
-	{ sistemaSonoro: ['titular', 'auxiliar'] }
+	'Estacionamento',
+	//{ sistemaSonoro: ['titular', 'auxiliar'] }
 ]
 
 //elementoComTexto:: string -> string -> object
