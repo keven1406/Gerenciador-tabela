@@ -1,10 +1,17 @@
 'use strict'
 
-//salvar no localStorage
-
 //experiencia envolvida: Antes de fazer qualquer projeto, veja como vai ser as saidas de dados.
-
 //OBSERVAÇÕES IMPORTANTES: ANTES DE SALVAR NO BANCO, PRECISA HAVER VALIDAÇÃO!
+
+//categoriaMarcada:: Array -> Boolean
+const validar = categorias => {
+	const marcado = false
+	categorias.forEach( item => {
+		if ((item.nodeName === "INPUT") && (item.checked) || (item.value)) 
+			marcado = true
+	})
+	return marcado
+}
 
 //criarId:: Number -> object -> String
 const criarId = indice => "pessoa" + indice
@@ -31,12 +38,16 @@ class PessoaSchema {
 const salvarNomes = document.getElementById('salvarNomes')
 
 salvarNomes.addEventListener('click', () => {
-	const listaCriada = listaPessoas
-	.map((arrayElementos, indice) => 
-		new PessoaSchema(arrayElementos, indice)
-	)
-
-	console.log(JSON.stringify(listaCriada))
+	if (validar(listaPessoas) != true) 
+		return alert("Você digitou algo errado")
+	else {
+		const listaCriada = listaPessoas
+		.map((arrayElementos, indice) =>
+			new PessoaSchema(arrayElementos, indice)
+		)
+		console.log(JSON.stringify(listaCriada))
+	}
 
 	//adicionar aqui a função para salvar
+
 })
