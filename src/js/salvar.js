@@ -3,15 +3,28 @@
 //experiencia envolvida: Antes de fazer qualquer projeto, veja como vai ser as saidas de dados.
 //OBSERVAÇÕES IMPORTANTES: ANTES DE SALVAR NO BANCO, PRECISA HAVER VALIDAÇÃO!
 
+
+
 //categoriaMarcada:: Array -> Boolean
 const validar = categorias => {
-	const marcado = false
-	categorias.forEach( item => {
-		if ((item.nodeName === "INPUT") && (item.checked) || (item.value)) 
-			marcado = true
-	})
+	let marcado = false
+	categorias.forEach(arrayCategorias => 
+		arrayCategorias.forEach(item => {
+			if (item.nodeName === "INPUT") {
+				if ((item.value != "") && (item.checked)) {
+					marcado = true
+				}
+			}
+		)
+	)
 	return marcado
 }
+
+
+
+
+
+
 
 //criarId:: Number -> object -> String
 const criarId = indice => "pessoa" + indice
