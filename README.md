@@ -41,6 +41,6 @@ O usuario deverá informar a quantidade de categorias e quantas pessoas que irá
 
 <h1>Falta de pessoas</h1>
 
-<p>Sempre que uma pessoa for eliminada de uma categoria, será necessario acrescentar uma pessoa no lugar dela. Se a lista precisar de 6 pessoas e tiver 5, a que falta será escolhida por embaralhamento.</p>
+<p>Sempre que uma pessoa for eliminada de uma categoria, será necessario acrescentar uma pessoa no lugar dela. Se a lista precisar de 6 pessoas no total, sendo 2 pessoas em cada dia e tiver 5, a que falta será escolhida por embaralhamento das oessias que já participaram da lista. No entanto, não será permitido nem a primeira pessoa, nem a ultima da lista, pois assim, ambas iriam em dias sequenciais.</p>
 	</article>
 </section>
