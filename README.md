@@ -2,7 +2,7 @@
 Um gerenciador de tabelas e listas.
 <section>
 	<article>
-<h1>Selecionando categorias<h1>
+<h1>Selecionando categorias</h1>
 
 <p>Ao inserir os nomes, o usuario irá marcar em qual categoria o participante irá está habilitado a participar.</p>
 
