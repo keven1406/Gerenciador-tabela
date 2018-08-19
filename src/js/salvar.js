@@ -6,6 +6,7 @@
 
 
 //categoriaMarcada:: Array -> Boolean
+/*
 const validar = categorias => {
 	let marcado = false
 	categorias.forEach(arrayCategorias => 
@@ -20,12 +21,7 @@ const validar = categorias => {
 	return marcado
 }
 
-
-
-
-
-
-
+*/
 //criarId:: Number -> object -> String
 const criarId = indice => "pessoa" + indice
 
@@ -51,15 +47,15 @@ class PessoaSchema {
 const salvarNomes = document.getElementById('salvarNomes')
 
 salvarNomes.addEventListener('click', () => {
-	if (validar(listaPessoas) != true) 
-		return alert("Você digitou algo errado")
-	else {
+	//if (validar(listaPessoas) != true) 
+	//	return alert("Você digitou algo errado")
+	//else {
 		const listaCriada = listaPessoas
 		.map((arrayElementos, indice) =>
 			new PessoaSchema(arrayElementos, indice)
 		)
 		console.log(JSON.stringify(listaCriada))
-	}
+	//}
 
 	//adicionar aqui a função para salvar
 

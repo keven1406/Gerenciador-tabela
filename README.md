@@ -2,11 +2,15 @@
 Um gerenciador de tabelas e listas.
 <section>
 	<article>
-<h1>Selecionando categorias</h1>
+<h1>Criar Categorias</h1>
 
-<p>Ao inserir os nomes, o usuario irá marcar em qual categoria o participante irá está habilitado a participar.</p>
+<p>Antes de qualquer coisa, o usuario irá precisar criar categorias para sua tabela. Para isso, ele irá inserir a categoria e a quantidade de pessoas que ela precisará por dia.</p>
 
-<p>As opções que estão com um X a frente significa que a pessoa não poderá participar da categoria.</p>
+<h1>Habilitando pessoas nas categorias</h1>
+
+<p>Ao inserir os nomes dos participantes, o usuario irá marcar em qual categoria o participante irá está habilitado a participar.</p>
+
+<p>As opções que estão com um X a frente significa que a pessoa não poderá participar da categoria, mas no app, esse X é uma caixa checkbox desmarcada.</p>
 
 <table>
 	<tr><td>Jonas</td><td>IND</td><td>MICRO</td></tr>   
@@ -27,7 +31,7 @@ O usuario deverá informar a quantidade de categorias e quantas pessoas que irá
 
 <h1>Embaralhamento</h1>
 
-<p>Embaralhamento ocorrerá por ordem da categoria que tivermenos pessoas para a categoria que tiver mais, já que em uma categoria menor, uma pessoa terá mais chances de aparecer repetidas vezes na mesma categoria que em uma maior.</p>
+<p>Embaralhamento ocorrerá por ordem da categoria que tivermenos pessoas para a categoria que tiver mais, já que em uma categoria menor, uma pessoa terá mais chances de aparecer repetidas vezes na mesma categoria que em uma maior. Caso tenha dois categorias menores com mesmo numero de pessoas, ela será embaralhada por ordem de listagem.</p>
 
 <h1>Montando lista</h1>
 
