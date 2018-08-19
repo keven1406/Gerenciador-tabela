@@ -20,6 +20,7 @@ Um gerenciador de tabelas e listas.
 	<tr><td>Roberto</td><td>IND</td><td>MICRO</td></tr> 
 	<tr><td>Andrade</td><td>X-IND</td><td>MICRO</td></tr> 
 	<tr><td>Daniel</td><td>IND</td><td>MICRO</td></tr> 
+	<input type = 'text>
 </table>
 <h1>Criando uma tabela</h1>
 
