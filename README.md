@@ -8,17 +8,15 @@ Um gerenciador de tabelas e listas.
 
 <p>As opções que estão com um X a frente significa que a pessoa não poderá participar da categoria.</p>
 
-Jonas 	IND 	MICRO   
-Antonio IND 	MICR
-
-Elias 	IND   	X-MICR
-Paulo 	IND 	MICRO
-
-Roberto IND 	MICRO
-Andrade X-IND 	MICRO
-
-Daniel 	IND 	MICRO
-
+<table>
+	<tr><td>Jonas</td><td>IND</td><td>MICRO</td></tr>   
+	<tr><td>Antonio</td><td>IND</td><td>MICR</td></tr> 
+	<tr><td>Elias</td><td>IND</td><td>X-MICR</td></tr> 
+	<tr><td>Paulo</td><td>IND</td><td>MICRO</td></tr> 
+	<tr><td>Roberto</td><td>IND</td><td>MICRO</td></tr> 
+	<tr><td>Andrade</td><td>X-IND</td><td>MICRO</td></tr> 
+	<tr><td>Daniel</td><td>IND</td><td>MICRO</td></tr> 
+</table>
 <h1>Criando uma tabela</h1>
 
 O usuario deverá informar a quantidade de categorias e quantas pessoas que irá participár nela por dia. O minimo será 1, o maximo será a quantidade total  de pessoas habilitadas a partircipar subtraido pela quantidade total que cada categoria poderá suportar. Ao clicar no botão criar, irá iniciar o processo de organização dos participantes.
