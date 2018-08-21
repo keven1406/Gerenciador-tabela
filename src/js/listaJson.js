@@ -1,25 +1,25 @@
-const JSONcategorias = 	[{
-	"Balcao de publicações": { 
+const JSONcategorias = 	[
+	{ 
 		"nome": "Balcao de publicações",
 		"publica": true,
 		"quantidade": 1 
 	},
-	"Sistema sonoro": { 
-			"nome": "Sistema sonoro",
-			"publica": false,
-			"quantidade": 1 
+	{ 
+		"nome": "Sistema sonoro",
+		"publica": false,
+		"quantidade": 1 
 	},
-	"Estacionamento": { 
-			"nome": "Estacionamento",
-			"publica": false,
-			"quantidade": 1 
+	{ 
+		"nome": "Estacionamento",
+		"publica": false,
+		"quantidade": 1 
 	},
-	"Palco": { 
-			"nome": "Palco",
-			"publica": false,
-			"quantidade": 1 
+	{ 
+		"nome": "Palco",
+		"publica": false,
+		"quantidade": 1 
 	}
-}]
+]
 
 
 const JSONlista = [
