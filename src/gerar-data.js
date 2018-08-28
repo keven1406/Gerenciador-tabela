@@ -1,4 +1,5 @@
 'use strict'
+
 const anoInicial = 2018,
 	anoFinal = 2019,
 	mesInicial = 8,
@@ -9,6 +10,7 @@ class Ano {
 	constructor (ano, mes) {
 		this.ano = ano
 		this.mesInicial = mes
+		//this.listaMeses = []
 	}
 }
 
@@ -16,15 +18,18 @@ function gerarData () {
 
 	//gerando ano 
 	
-	//transformar em uma função recursiva
+	//transformar em uma função recursiva construtora!
 	let anos = []
 	for (let anoAtual = anoInicial; anoInicial <= anoFinal; anoAtual++) {
 		if(anoAtual === anoInicial) 
 			anos.push(new Ano(anoAtual, mesInicial))
-		else
-			if (anoAtual === anoFinal)
+		else if (anoAtual === anoFinal)
 				anos.push(new Ano(anoAtual, 12 - mesFinal))
 				//12 - mesFinal inverte o mes, para que quando for calcular o mes restante, de o numero exato de mes restante.		
+		} else {
+			anos.push(new Ano(anoAtual, 0))
+		}
+
 	}
 
 	console.log(anos)
@@ -40,7 +45,30 @@ function gerarData () {
 		return ano
 	}
 
-	const anosMeses = anos.map(gerarMeses)
+	anos.forEach(gerarMeses)
+
+	class Mes {
+		constructor (mes, dias) {
+			this.mes = mes
+			this.nome = nomearMes()
+			this.dias = dias
+			//this.listaDias = []
+		}			
+	}
+
+	const criarMeses = (ano, mesAtual, totalMeses) => {
+			const meses = [],
+				  mes = mesAtual - (mesAtual - 1),
+				  date = new Date(ano, mesAtual, 0),
+
+			if (mesAtual > totalMeses) return meses
+			meses.push(new Mes(mes, date.getData()))
+		return criarMeses(ano, amesAtual + 1, 12)
+	}
+
+	anos.forEach(ano => { //criarMeses:: mes -> array de meses restantes
+		ano.listaMeses = criarMeses(ano.ano, ano.meses)
+	})
 
 
 
