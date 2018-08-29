@@ -10,7 +10,7 @@ class Ano {
 	constructor (ano, mes) {
 		this.ano = ano
 		this.mesInicial = mes
-		//this.listaMeses = []
+		this.listaMeses = []
 	}
 }
 
@@ -21,6 +21,7 @@ function gerarData () {
 	//transformar em uma função recursiva construtora!
 	const anos = []
 	for (let anoAtual = anoInicial; anoAtual <= anoFinal; anoAtual++) {
+		console.log(anoAtual, 'ano guardado')
 		if (anoAtual === anoInicial) 
 			anos.push(new Ano(anoAtual, mesInicial))
 		else if (anoAtual === anoFinal) {
@@ -31,8 +32,10 @@ function gerarData () {
 		}
 
 	}
+	console.log('\n')
 
-	console.log(anos)
+	console.log(anos, ' quantidade de anos')
+	console.log('\n')
 	//[{2018}, {2019} ...]
 
 	//mesesRestabtes:: Number -> Number
@@ -40,7 +43,7 @@ function gerarData () {
 
 	//gerarMeses:: Number -> Number
 	const gerarMeses = ano => {
-		if (ano.mes != 0) ano.mes = mesesRestantes(ano.mes)
+		if (ano.mesInicial != 0) ano.mesInicial = mesesRestantes(ano.mesInicial)
 		else ano.mes = mesesRestantes(0)
 		return ano
 	}
@@ -74,21 +77,24 @@ function gerarData () {
 		}			
 	}
 
-	const criarMeses = (ano, mesAtual, totalMeses) => {
-				console.log(mesAtual)
-		const meses = [],
-			  mes = mesAtual - (mesAtual - 1),
-			  date = new Date(ano, mesAtual, 0)
-		if (mesAtual > totalMeses) return meses
-		meses.push(new Mes(mes, date.getDate()))
-		return criarMeses(ano, mesAtual + 1, 12)
+	//criarMeses:: (Number, Number, Array) -> Array
+	const criarMeses = (ano, mesAtual, meses) => {
+		  const mes = mesAtual - (mesAtual - 1),
+		  date = new Date(ano, mesAtual, 0)
+		if (mesAtual > 12) return meses
+			meses.push(new Mes(mesAtual, date.getDate()))
+			return criarMeses(ano, mesAtual + 1, meses)
+		
 	}
 
-	anos.map(ano => { //criarMeses:: mes -> array de meses restantes
-		ano.listaMeses = criarMeses(ano.ano, 12 - mesInicial)
+
+
+	anos.forEach((ano, indice) => { //criarMeses:: mes -> array de meses restantes
+		ano.listaMeses = criarMeses(ano.ano, 12 - mesInicial, [])
 	})
 
-	console.log(anos)
+
+	console.log("\n", anos)
 
 	//criar dias.
 	//bug em algum loop
