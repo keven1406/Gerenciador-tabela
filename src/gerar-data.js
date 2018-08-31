@@ -1,10 +1,11 @@
 'use strict'
+
 const anoInicial = {
 	ano: 2018,
 	mesInicial: 8,
 }
 const anoFinal = {
-	ano: 2019,
+	ano: 2030,
 	mesFinal: 10
 }
 const diaSemana = [1,5]
@@ -40,8 +41,8 @@ function gerarData () {
 		else if (anoAtual === anoInicial.ano)
 			anos.push(new Ano(anoAtual, anoInicial.mesInicial, 12))
 		else if (anoAtual === anoFinal.ano)
-			anos.push(new Ano(anoAtual, 0, anoFinal.mesFinal))
-		else anos.push(new Ano(anoAtual, 0, 12))
+			anos.push(new Ano(anoAtual, 1, anoFinal.mesFinal))
+		else anos.push(new Ano(anoAtual, 1, 12))
 
 	}
 	
@@ -65,14 +66,13 @@ function gerarData () {
 	}
 
 	//corrigir bug no mes
-	
+
 	//criarMeses:: (Number, Number, Array) -> Array
 	const criarMeses = ano => {
-		let meses = []
 		const criar = (mes) => {
 			const date = new Date(ano.ano, mes, 0)
-			if (mes > ano.mesFinal) return meses
-			meses.push(new Mes(mes, date.getDate()))
+			if (mes > ano.mesFinal) return null
+			ano.listaMeses.push(new Mes(mes, date.getDate()))
 			return criar(mes + 1)
 		}
 		criar(ano.mesInicial)
@@ -80,6 +80,10 @@ function gerarData () {
 
 	//inserir meses a cada ano
 	anos.forEach(criarMeses)
+
+	console.log(anos.forEach(ano => {
+		console.log("Ano de " + ano.ano, "\n", ano.listaMeses)
+	}))
 
 }
 
