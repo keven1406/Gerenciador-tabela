@@ -72,7 +72,13 @@ function gerarData () {
 		return nomeMeses[mes - 1]
 	}
 
-	//corrigir bug no mes
+	//diaDaSemana:: Number -> Number
+	const diaDaSemana = dia => {
+		const nomeDias = [
+			"Domingo","Segunda","Terça"," Quarta","Quinta","Sexta","Sábado"
+		]
+		return nome[dia - 1]
+	}
 
 	//criarMeses:: (Number, Number, Array) -> Array
 	const criarMeses = ano => {
@@ -102,7 +108,8 @@ function gerarData () {
 	const criarDia = ano => mes => {
 		const criar = dia => {
 			if (dia > mes.dias) return null
-			mes.listaDias.push(new Dia(ano, mes, dia))
+			if (diaSemana[diaDaSemana(dia)])
+				mes.listaDias.push(new Dia(ano, mes, dia))
 			return criar(dia + 1)
 		}
 		criar(1)
