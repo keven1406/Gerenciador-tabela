@@ -1,6 +1,7 @@
 'use strict'
 
 //adiciona cada pessoa habilitada a uma lista na determinada categoria
+//FALTA A FUNCAO GERAR JSON.
 
 const acionarLista = document.getElementById('acionarLista')
 

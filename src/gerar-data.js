@@ -5,10 +5,11 @@ const anoInicial = {
 	mesInicial: 8,
 }
 const anoFinal = {
-	ano: 2019,
+	ano: 2018,
 	mesFinal: 10
 }
-const diasSelecionados = [1,5]
+//explicação do erro: algo está somando o 1 com 2. dando 3
+const diasSelecionados = [1,6]
 
 function gerarData () {
 	class Ano {
@@ -50,6 +51,8 @@ function gerarData () {
 		else anos.push(new Ano(anoAtual, 1, 12))
 	}
 	
+	//MESES
+
 	//nomearMes:: Number -> String
 	const nomearMes = mes => {
 		const nomeMeses = [ 
@@ -84,29 +87,31 @@ function gerarData () {
 	anos.forEach(criarMeses)
 
 	//GERAR DIAS
-	//regras:
-	//O usuario irá dizer quantos dias será criados por semana
-	//cada dia terá um ID unico com ano, mes, dia 30-12-2018
-
 
 	//diaDaSemana:: Number -> Number
-	const diaDaSemana = dia => {
+	const diaDaSemana = diab => {
+		console.log('dia', diab)
 		const nomeDias = [
 			"Domingo","Segunda","Terça"," Quarta","Quinta","Sexta","Sábado"
 		]
-		return nomeDias[dia - 1]
+		return nomeDias[diab]
+		//-----------BUG ESTÁ AQUI!!!----------
+	}
+
+	//verificarDia:: Number -> Number -> Boolean
+	const verificarDia = dias => diaRegistrado => {
+		//console.log(dia, diaRegistrado) 1
+		//console.log(diaDaSemana(dia - 1) === diaDaSemana(diaRegistrado))
+		return diaDaSemana(dias) === diaDaSemana(diaRegistrado) ? true : false
 	}
 
 	//diaAtual:: (Number, Number, Number) -> Number
 	const diaAtual = (ano, mes, dia) => {
+		console.log(ano, mes, dia)
 		const date = new Date
-		date.setFullYear(ano, mes, dia)
-		return date.getDay()
+		date.setFullYear(ano, mes - 1, dia)
+		return date.getDay() //1 segunda 1
 	}
-
-	//verificarDia:: Number -> Number -> Boolean
-	const verificarDia = diaRegistrado => dia =>
-		diaDaSemana(diaRegistrado) === diaDaSemana(dia) ? true : false
 
 	//criarDia:: Objeto -> Objeto
 	const criarDia = ano => mes => {
@@ -122,8 +127,8 @@ function gerarData () {
 	anos.forEach(ano => 
 		ano.listaMeses.forEach(mes => {
 			criarDia(ano)(mes)
-			console.log(ano)
-			console.log(mes)
+			//console.log(ano)
+			console.log(mes.listaDias)
 		})
 	)
 }
