@@ -130,6 +130,7 @@ const apagarFilhos = pai => {
 
 guardarQuantidade.addEventListener('click', () => {
 	listaPessoas = []
+	console.log('oooooooooooooooooooooooooo')
 	const areaNomes = document.getElementById('areaNomes')
 	if (areaNomes.childNodes[1] != undefined) {
 		apagarFilhos(areaNomes)
